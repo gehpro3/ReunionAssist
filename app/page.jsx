@@ -1,8 +1,9 @@
-// This is the content for app/page.jsx
+// File: app/page.jsx
 export default function HomePage() {
   return (
     <div>
-      <h1>Reunion Assistant is Running!</h1>
+      <h1>Welcome to Reunion Assist!</h1>
+      <p>The application has successfully built.</p>
     </div>
   );
 }
