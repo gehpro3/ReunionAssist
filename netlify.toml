@@ -1,14 +1,12 @@
-# netlify.toml
-
 [build]
   command = "npm run build"
-  publish = "public" # Adjust to match your static output directory
+  publish = "public" # Update if your static output folder is named differently
 
 [functions]
-  directory = "netlify/functions" # Customize to match your functions folder
+  directory = "netlify/functions" # Ensure your serverless functions live here
 
 [framework]
-  name = "none" # Disable incorrect auto-detection like Next.js
+  name = "none" # Override Netlify's auto-detection (e.g., Next.js)
 
 [dev]
   command = "npm run dev"
