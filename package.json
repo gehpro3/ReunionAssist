@@ -1,10 +1,8 @@
-"scripts": {
-  "build": "next build"
-}{
-  "name": "netlify-genai-app",
+{
+  "name": "Reuion-Assist",
   "version": "1.0.0",
-  "dependencies": {
-    "@google/generative-ai": "^0.6.0",
-    "@netlify/functions": "^2.0.0"
-  }
+  "scripts": {
+    "build": "next build"
+  },
+  ...
 }
