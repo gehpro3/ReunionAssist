@@ -1,4 +1,6 @@
-{
+"scripts": {
+  "build": "next build"
+}{
   "name": "netlify-genai-app",
   "version": "1.0.0",
   "dependencies": {
