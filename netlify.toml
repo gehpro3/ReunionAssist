@@ -1,13 +1,7 @@
 [build]
-  command = "npm run build"
-  publish = "public" # Update if your static output folder is named differently
+publish = "public"
+functions = "netlify/functions"
+framework = "#custom"
 
 [functions]
-  directory = "netlify/functions" # Ensure your serverless functions live here
-
-[framework]
-  name = "none" # Override Netlify's auto-detection (e.g., Next.js)
-
-[dev]
-  command = "npm run dev"
-  port = 8888
+external_node_modules = ["@google/generative-ai"]
