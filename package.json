@@ -1,13 +1,14 @@
-{
-  "name": "my-ai-agent",
+  {
+  "name": "reunion-assist",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "dependencies": {
+"dependencies": {
     "-": "^0.0.1",
     "@google/generative-ai": "^0.24.1",
     "next": "^14.2.31",

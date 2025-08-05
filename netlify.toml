@@ -1,0 +1,15 @@
+# netlify.toml
+
+[build]
+  command = "npm run build"
+  publish = "public" # Adjust to match your static output directory
+
+[functions]
+  directory = "netlify/functions" # Customize to match your functions folder
+
+[framework]
+  name = "none" # Disable incorrect auto-detection like Next.js
+
+[dev]
+  command = "npm run dev"
+  port = 8888
