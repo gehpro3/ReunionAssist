@@ -1,30 +1,23 @@
 import { NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// IMPORTANT: Authenticate with your API key from an environment variable
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
-
+// This is the only function we will run.
 export async function POST(request: Request) {
-  try {
-    // 1. Get the user's message from the request body
-    const body = await request.json();
-    const { message } = body;
 
-    if (!message) {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
-    }
+  // Get the API key directly from the environment.
+  const apiKey = process.env.GOOGLE_API_KEY;
 
-    // 2. Call the Google AI API
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    const result = await model.generateContent(message);
-    const response = result.response;
-    const aiText = response.text();
-
-    // 3. Send the AI's response back to the frontend
-    return NextResponse.json({ reply: aiText });
-
-  } catch (error) {
-    console.error("Error in API route:", error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  // Check if the key exists and has content.
+  if (apiKey && apiKey.length > 5) {
+    // If it exists, return a SUCCESS message.
+    // We will show only the last 4 characters for security.
+    return NextResponse.json({ 
+      status: "SUCCESS: Vercel found the API Key.",
+      keyPreview: `...${apiKey.slice(-4)}` 
+    });
+  } else {
+    // If it's missing, return a FAILURE message.
+    return NextResponse.json({ 
+      status: "FAILURE: The GOOGLE_API_KEY is MISSING in the Vercel server environment."
+    }, { status: 500 }); // Send a server error status
   }
 }
