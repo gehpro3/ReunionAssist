@@ -38,7 +38,7 @@ export default function HomePage() {
 
   return (
     <main style={{ fontFamily: "sans-serif", maxWidth: "600px", margin: "auto", padding: "2rem" }}>
-      <h1>My AI Application</h1>
+      <h1>Welcom to Reunion Assist</h1>
       <form onSubmit={handleSubmit}>
         <textarea
           rows="5"
