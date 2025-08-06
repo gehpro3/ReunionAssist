@@ -1,18 +1,25 @@
 {
+  "name": "reunion-assist",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "next build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@google/generative-ai": "^0.5.0",
-    "eslint": "^9.32.0",
-    "firebase-admin": "^11.10.1",
-    "firebase-functions": "^4.9.0",
-    "next": "^15.4.5",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "next": "14.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@types/react": "19.1.9",
-    "typescript": "5.9.2"
+    "@types/node": "20.14.9",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.4",
+    "typescript": "5.5.2"
   }
 }
