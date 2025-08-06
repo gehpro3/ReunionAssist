@@ -1,28 +1,30 @@
 import { NextResponse } from 'next/server';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
-/**
- * Handles GET requests to /api/chat.
- * @returns A JSON response with a message.
- */
-export async function GET() {
-  // Return a simple JSON response
-  return NextResponse.json({ message: "Hello from the Chat API!" });
-}
+// IMPORTANT: Authenticate with your API key from an environment variable
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || '');
 
-/**
- * Handles POST requests to /api/chat.
- * @param {Request} request - The incoming request object.
- * @returns A JSON response confirming receipt of the message.
- */
 export async function POST(request: Request) {
   try {
+    // 1. Get the user's message from the request body
     const body = await request.json();
-    console.log("Received message:", body.message);
-    
-    // Echo the message back or add your custom logic here
-    return NextResponse.json({ reply: `You said: ${body.message}` });
+    const { message } = body;
+
+    if (!message) {
+      return NextResponse.json({ error: 'Message is required' }, { status: 400 });
+    }
+
+    // 2. Call the Google AI API
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const result = await model.generateContent(message);
+    const response = result.response;
+    const aiText = response.text();
+
+    // 3. Send the AI's response back to the frontend
+    return NextResponse.json({ reply: aiText });
 
   } catch (error) {
-    return NextResponse.json({ error: 'There was an error processing your request.' }, { status: 500 });
+    console.error("Error in API route:", error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
