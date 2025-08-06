@@ -1,20 +1,28 @@
 import { NextResponse } from 'next/server';
 
-// You MUST export a named function corresponding to an HTTP method
-// e.g., GET, POST, PUT, DELETE, etc.
+/**
+ * Handles GET requests to /api/chat.
+ * @returns A JSON response with a message.
+ */
+export async function GET() {
+  // Return a simple JSON response
+  return NextResponse.json({ message: "Hello from the Chat API!" });
+}
+
+/**
+ * Handles POST requests to /api/chat.
+ * @param {Request} request - The incoming request object.
+ * @returns A JSON response confirming receipt of the message.
+ */
 export async function POST(request: Request) {
   try {
-    // Your logic to handle the chat API will go here
     const body = await request.json();
-    const { message } = body;
-
-    // ... do something with the message ...
-
-    // Return a response
-    return NextResponse.json({ reply: "This is a response from the chat API" });
+    console.log("Received message:", body.message);
+    
+    // Echo the message back or add your custom logic here
+    return NextResponse.json({ reply: `You said: ${body.message}` });
 
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({ error: 'There was an error processing your request.' }, { status: 500 });
   }
 }
