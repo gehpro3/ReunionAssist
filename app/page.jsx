@@ -1,45 +1,45 @@
-"use client"; // This line is crucial for interactive components
+"use client"; // This is crucial. It tells Next.js this is an interactive component.
 
 import { useState } from 'react';
 
 export default function Home() {
-  // State to hold the text the user types into the input box
+  // State to hold what the user types
   const [prompt, setPrompt] = useState("");
   
-  // State to hold the response we get back from the AI
+  // State to hold the AI's response
   const [aiResponse, setAiResponse] = useState("");
 
-  // State to show a "Loading..." message while we wait for the AI
+  // State to show a loading message
   const [isLoading, setIsLoading] = useState(false);
 
-  // This function runs when the "Run AI" button is clicked
+  // This function runs when the button is clicked
   const handleRunAI = async () => {
     setIsLoading(true);
     setAiResponse("");
 
     try {
-      // Send the user's prompt to our backend API
+      // 1. Call your own backend API
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: prompt }), // Send the text from the input box
+        body: JSON.stringify({ message: prompt }), // Send the content of the input box
       });
 
       if (!response.ok) {
-        throw new Error('Something went wrong on the server.');
+        throw new Error('Network response was not ok');
       }
 
-      // Get the AI's reply from the API response
+      // 2. Get the AI's reply and display it
       const data = await response.json();
       setAiResponse(data.reply);
 
     } catch (error) {
       console.error("Failed to fetch AI response:", error);
-      setAiResponse("Sorry, there was an error. Please check the logs.");
+      setAiResponse("Sorry, something went wrong. Please make sure your API key is set in Vercel.");
     } finally {
-      setIsLoading(false); // Stop the loading indicator
+      setIsLoading(false);
     }
   };
 
@@ -47,7 +47,6 @@ export default function Home() {
     <main style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '600px', margin: 'auto' }}>
       <h1>Welcome to Reunion Assist</h1>
       
-      {/* Input box for the user's prompt */}
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
@@ -55,7 +54,6 @@ export default function Home() {
         style={{ width: '100%', minHeight: '80px', padding: '0.5rem', marginTop: '1rem' }}
       />
       
-      {/* The button that triggers the AI call */}
       <button 
         onClick={handleRunAI} 
         disabled={isLoading || !prompt}
@@ -64,7 +62,6 @@ export default function Home() {
         {isLoading ? "Thinking..." : "Run AI"}
       </button>
 
-      {/* A section to display the response from the AI */}
       {aiResponse && (
         <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0f0f0', border: '1px solid #ccc', whiteSpace: 'pre-wrap' }}>
           <h2>AI Response:</h2>
