@@ -1,1 +1,1 @@
-functions
+echo "functions" > .vercelignore
