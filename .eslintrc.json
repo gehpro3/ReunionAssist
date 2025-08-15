@@ -1,3 +1,3 @@
-{
-  "extends": "next/core-web-vitals"
-}
+``*   **File: `.eslintrc.json`** -> Replace with this:
+```json
+{ "extends": "next/core-web-vitals" }
