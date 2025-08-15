@@ -2,7 +2,14 @@ import { NextResponse } from 'next/server';
 import admin from '@/lib/firebaseAdmin'; // Use the correct alias path
 
 const db = admin.firestore();
+import { NextResponse } from 'next/server';
+import admin from '@/lib/firebaseAdmin';
 
+const db = admin.firestore();
+
+export async function GET(request: Request, { params }: { params: { collection: string } }) {
+    const collectionName = params.collection;
+    // ... (rest of GET function)
 // GET from any collection (e.g., /api/data/guests)
 export async function GET(request: Request, { params }: { params: { collection: string } }) {
     const collectionName = params.collection;
