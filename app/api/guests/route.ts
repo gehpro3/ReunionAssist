@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import admin from '../../../lib/firebaseAdmin';
+import admin from '@/lib/firebaseAdmin'; // <-- CORRECTED PATH ALIAS
 
 const db = admin.firestore();
 const guestsCollection = db.collection('guests');
@@ -40,4 +40,16 @@ export async function PUT(request: Request) {
     }
 }
 
-// You can add a DELETE function here later following the same pattern.
+// DELETE function: To remove a guest from the database
+export async function DELETE(request: Request) {
+    try {
+        const { id } = await request.json();
+        if (!id) return NextResponse.json({ error: 'Guest ID is required' }, { status: 400 });
+
+        await guestsCollection.doc(id).delete();
+        return NextResponse.json({ message: 'Guest deleted successfully' });
+    } catch (error) {
+        console.error("Failed to delete guest:", error);
+        return NextResponse.json({ error: 'Failed to delete guest' }, { status: 500 });
+    }
+}
