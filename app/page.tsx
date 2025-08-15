@@ -12,7 +12,10 @@ export default function Home() {
           height={38}
           priority
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
+  // In Header.tsx or wherever your main title is
+<h1 className="text-2xl font-bold ...">
+  THIS IS THE NEW, WORKING PROJECT
+</h1>      <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
             <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">

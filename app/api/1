@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "includeFiles": [
+      "node_modules/firebase-functions/**",
+      "node_modules/firebase-admin/**",
+      "netlify/functions/genai.js"
+    ]
+  }
+}
